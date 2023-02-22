@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from user.models import *
 # Create your views here.
+# index
 def index(request):
     return render(request, 'index.html')
 
