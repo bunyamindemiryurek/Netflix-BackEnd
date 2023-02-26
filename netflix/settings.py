@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!m8w6*onszy9k^jhvwf_z!uzc7rr*1r&1morgcd$l_y#sja4@m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,11 +118,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+if DEBUG == True:
+    STATIC_URL = 'static/'
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+    MEDIA_URL = ''
+    MEDIA_ROOT = os.path.join(
+    BASE_DIR  / 'media'
+    )
+else:
+    STATIC_URL = 'static/'
+    STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(
+        BASE_DIR  / 'media'
+    )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -131,10 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #database files
 
-MEDIA_URL = ''
-MEDIA_ROOT = os.path.join(
-    BASE_DIR  / 'media'
-)
+
 
 from django.contrib.messages import constants as messages
 MESSAGES_TAGS ={
